@@ -1,0 +1,20 @@
+---
+
+- hosts: CrowdStrike
+#  gather_facts: True
+  tasks: 
+#   - include_vars: /etc/ansible/roles/crowdstrike/vars.yaml
+
+   - name: Copy WindowsSensor.exe to Windows servers
+     win_copy:
+        src: /tmp/WindowsSensor.exe
+        dest: C:\WindowsSensor.exe
+   - name: Copy CrowdStrike PS to Windows hosts
+     win_copy:
+         src: /opt/CrowD.ps1
+         dest: C:\Users\piyush-gupta1\Desktop\CrowD.ps1
+   - win_shell: C:\Users\piyush-gupta1\Desktop\CrowD.ps1 >> C:\Users\piyush-gupta1\Desktop\somelog.txt
+     args:
+       chdir: C:\Users\piyush-gupta1\Desktop
+       creates: C:\Users\piyush-gupta1\Desktop\somelog.txt
+
